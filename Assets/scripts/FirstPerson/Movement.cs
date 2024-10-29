@@ -35,10 +35,13 @@ public class MoveFirstPersonOnject : MonoBehaviour
         moveVector *= moveSpeed;
 
         grounded = Physics.Raycast(transform.position, Vector3.down, (playerHeight * 0.5f) + 0.2f, whatIsGround);
+        Debug.DrawRay(transform.position, Vector3.down * playerHeight * 0.5f, Color.blue);
 
         float verticalspeed = rb.linearVelocity.y;
 
         if (grounded)
             rb.linearVelocity = new Vector3(moveVector.x, verticalspeed, moveVector.z);
+
+        Debug.Log(grounded);
     }
 }
