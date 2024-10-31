@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 public class Button : MonoBehaviour
 {
-
     public new Transform camera; 
     public float reach = 4f; 
 

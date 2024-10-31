@@ -1,26 +1,30 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class simpleTrigger : MonoBehaviour
+public class SimpleTrigger : MonoBehaviour
 {
-    public bool DestroyOnTrigger;
+    public bool destroyOnTrigger;
     public string tagFilter;
 
     public UnityEvent onTriggerEnter;
-    public UnityEvent ontTriggerExit;
-
+    public UnityEvent onTriggerExit;
 
     void OnTriggerEnter(Collider other)
-    {   
-        if(other.CompareTag(tagFilter))
+    {
+        if (other.CompareTag(tagFilter))
         {
             onTriggerEnter.Invoke();
+        }
+    }
 
-            if (DestroyOnTrigger)
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(tagFilter))
+        {
+            onTriggerExit.Invoke();
+
+            if (destroyOnTrigger)
                 Destroy(gameObject);
         }
-        
-            
-        
     }
 }

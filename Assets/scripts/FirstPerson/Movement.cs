@@ -41,7 +41,5 @@ public class MoveFirstPersonOnject : MonoBehaviour
 
         if (grounded)
             rb.linearVelocity = new Vector3(moveVector.x, verticalspeed, moveVector.z);
-
-        Debug.Log(grounded);
     }
 }
