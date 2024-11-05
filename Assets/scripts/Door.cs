@@ -1,33 +1,31 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Door : MonoBehaviour
+public class DoorFixed : MonoBehaviour
 {
     public bool closed = true;
     public float openDegrees = 90f;
     public float openSpeed = 60f;
 
     // Private Variables
-    float closedDegreees;
+    float startAngle;
+    float currentOffset;
+    float closedOffset = 0f;
+    float openOffset = 90f;
 
-    Vector3 closedEulerAngles;
-    Vector3 openedEulerAngles;
-    
+
     void Start()
     {
-        closedDegreees = transform.localEulerAngles.y;
-
-        closedEulerAngles = new Vector3(0f, closedDegreees, 0f);
-        openedEulerAngles = new Vector3(0f, closedDegreees + openDegrees, 0f);
+        startAngle = transform.localEulerAngles.y;
     }
 
-    
     void Update()
     {
         if (closed)
-            transform.localEulerAngles = Vector3.MoveTowards(transform.localEulerAngles, closedEulerAngles, openSpeed * Time.deltaTime);
+            currentOffset = Mathf.MoveTowards(currentOffset, closedOffset, openSpeed * Time.deltaTime);
         else
-            transform.localEulerAngles = Vector3.MoveTowards(transform.localEulerAngles, openedEulerAngles, openSpeed * Time.deltaTime);
+            currentOffset = Mathf.MoveTowards(currentOffset, openOffset, openSpeed * Time.deltaTime);
+
+        transform.localEulerAngles = new Vector3(0f, startAngle + currentOffset, 0f);
     }
 
     public void ToggleOpen()
